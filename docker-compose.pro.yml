@@ -1,0 +1,8 @@
+# production environment
+
+version: '3.7'
+
+services:
+  redis:
+    volumes:
+      - /data/logger/redis:/data

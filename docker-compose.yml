@@ -1,0 +1,23 @@
+# master compose
+
+version: '3.7'
+
+services:
+
+  logger:
+    image: logger
+    build: .
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - redis
+    ports:
+      - 3000:3000
+    links:
+      - redis
+    restart: always
+
+  redis:
+    image: redis:alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    restart: always
