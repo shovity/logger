@@ -8,3 +8,5 @@ RUN yarn --pure-lockfile && mv node_modules ../
 COPY . .
 
 CMD yarn start
+
+EXPOSE 80

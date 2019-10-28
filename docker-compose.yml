@@ -14,7 +14,6 @@ services:
     networks:
       - backend
       - default
-    restart: always
 
   redis:
     image: redis:alpine
@@ -22,6 +21,8 @@ services:
     restart: always
     networks:
       - default
+    volumes:
+      - ./data/redis:/data
 
 networks:
   backend:

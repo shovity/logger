@@ -10,6 +10,4 @@ services:
     environment:
       NODE_ENV: development
     command: yarn dev -L
-  redis:
-    volumes:
-      - ./data/logger/redis:/data
+    
