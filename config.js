@@ -1,6 +1,6 @@
 const config = {}
 
-config.port = 3000
+config.port = 80
 
 config.redis  = {
     host: 'redis',

@@ -7,5 +7,4 @@ RUN yarn --pure-lockfile && mv node_modules ../
 
 COPY . .
 
-EXPOSE 3000
 CMD yarn start

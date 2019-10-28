@@ -11,8 +11,6 @@ services:
       NODE_ENV: production
     depends_on:
       - redis
-    ports:
-      - 3000:3000
     networks:
       - backend
       - default
