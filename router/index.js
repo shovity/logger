@@ -5,11 +5,12 @@ const uuid = require('uuid/v4')
 const moment = require('moment')
 
 const redis = require('../redis')
+const logService = require('../services/logService')
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    return res.json({ name: 'You know for logging' })
+    return res.json({ name: 'You know for log' })
 })
 
 
@@ -20,15 +21,17 @@ router.get('/api/v1/log', (req, res) => {
 
 router.post('/api/v1/log', (req, res) => {
 
-    const { key, message, data } = req.body
+    const { namespace, key, action, message, user, data } = req.body
+
+    if (!namespace || !key || !message || !action) {
+        return res.json({ error: { message: 'missing param' } })
+    }
 
     const id = uuid()
     const created = Date.now()
     
-    const log = { id, key, message, data, created }
+    logService.push({ namespace, key, message, action, user, data, created, id })
 
-    redis.zadd(`logger:log:${key}:${moment().format('DD/MM/YYYY')}:${id}`, created, JSON.stringify(log))
-    
     return res.json({ id })
 })
 
