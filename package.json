@@ -9,7 +9,9 @@
   "private": true,
   "scripts": {
     "start": "node app",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+
+    "up": "sh bin/dcom-start"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

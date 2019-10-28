@@ -4,7 +4,6 @@ const express = require('express')
 const uuid = require('uuid/v4')
 const moment = require('moment')
 
-const redis = require('../redis')
 const logService = require('../services/logService')
 
 const router = express.Router()
@@ -23,14 +22,14 @@ router.post('/api/v1/log', (req, res) => {
 
     const { namespace, key, action, message, user, data } = req.body
 
-    if (!namespace || !key || !message || !action) {
-        return res.json({ error: { message: 'missing param' } })
+    if (!namespace || !key || !action || !message) {
+        return res.json({ error: { message: 'missing param: namespace || key || action || message' } })
     }
 
     const id = uuid()
     const created = Date.now()
     
-    logService.push({ namespace, key, message, action, user, data, created, id })
+    logService.push({ namespace, key, action, message, user, data, created, id })
 
     return res.json({ id })
 })
