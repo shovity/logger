@@ -15,13 +15,16 @@ services:
       - 3000:3000
     networks:
       - backend
+      - default
     restart: always
 
   redis:
     image: redis:alpine
     command: ["redis-server", "--appendonly", "yes"]
     restart: always
+    networks:
+      - default
 
 networks:
   backend:
-    external: true
+    name: backend
