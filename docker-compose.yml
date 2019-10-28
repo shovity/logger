@@ -13,11 +13,15 @@ services:
       - redis
     ports:
       - 3000:3000
-    links:
-      - redis
+    networks:
+      - backend
     restart: always
 
   redis:
     image: redis:alpine
     command: ["redis-server", "--appendonly", "yes"]
     restart: always
+
+networks:
+  backend:
+    external: true

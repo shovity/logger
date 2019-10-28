@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Usage:
-# ./bin/dcom-start pro
-# ./bin/dcom-start dev
+# ./bin/up pro
+# ./bin/up dev
 
 env=$1
 

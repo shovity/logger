@@ -16,7 +16,7 @@ const server = http.createServer(app)
 // apply middlewares
 app.use(cors())
 app.use(bodyParser.json())
-app.use(router)
+app.use('/logger/api', router)
 
 // listen
 server.listen(config.port, () => {
