@@ -9,4 +9,4 @@ COPY . .
 
 CMD yarn start
 
-EXPOSE 80
+EXPOSE 3000
