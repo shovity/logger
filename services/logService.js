@@ -34,4 +34,24 @@ logService.push = (log) => {
         })
 }
 
+logService.get = (query, done) => {
+    const { namespace, key, startTime, endTime, limit, offset  } = query || {}
+    
+    redis.zrange(`index:log:${namespace}:created`, -offset - limit, -offset - 1, (error, logIds) => {
+        if (error) {
+            done(error)
+        } else {
+            logIds.reverse()
+
+            redis.hmget(`data:log:${namespace}`, logIds, (error, logs) => {
+                if (error) {
+                    done(error)
+                } else {
+                    done(null, { data: logs.map(l => JSON.parse(l)) })
+                }
+            })
+        }
+    })
+}
+
 module.exports = logService

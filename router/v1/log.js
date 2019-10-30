@@ -10,7 +10,20 @@ const api = express.Router()
 
 
 api.get('/', (req, res) => {
-    return res.json({ a: uuid(), b: moment().format('DD/MM/YYYY')})
+    const limit = req.query.limit || 100
+    const offset = req.query.offset || 0
+    const namespace = req.query.namespace
+    const key = req.query.key
+    const startTime = req.query.start_time
+    const endTime = req.query.end_time
+
+    if (!namespace) {
+        return res.json({ error: { message: 'missing namespace' } })
+    }
+
+    logService.get({ namespace, key, startTime, endTime, limit, offset }, (error, logs) => {
+        return res.json(logs)
+    })
 })
 
 api.post('/', (req, res) => {
